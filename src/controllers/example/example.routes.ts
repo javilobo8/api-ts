@@ -5,7 +5,6 @@ const routes: IAppRoute[] = [
     path: '/message',
     method: 'get',
     bind: 'getExampleMessage',
-    middlewares: [],
   },
 ];
 

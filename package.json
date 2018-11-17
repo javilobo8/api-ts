@@ -40,6 +40,8 @@
   },
   "jest": {
     "testEnvironment": "node",
+    "verbose": true,
+    "setupTestFrameworkScriptFile": "<rootDir>/test/bootstrap-jest.js",
     "transform": {
       ".(ts|tsx)": "ts-jest"
     },
@@ -47,6 +49,11 @@
     "collectCoverageFrom": [
       "src/**/*.{ts|js}",
       "!src/bin/*.{ts|js}"
+    ],
+    "coverageReporters": [
+      "json",
+      "lcov",
+      "clover"
     ],
     "moduleFileExtensions": [
       "ts",
