@@ -3,34 +3,32 @@ import { Express, Router } from 'express';
 import IAppContainer from 'src/interfaces/IAppContainer';
 import IAppRoute from 'src/interfaces/IRoute';
 
-import ExampleController from './example/example.controller';
-import ExampleRoutes from './example/example.routes';
+import ExampleController from './example.controller';
 
 /**
  * Creates a router from routes and binds to a controller.
  *
  * @param {Express} app
- * @param {Object} controller
- * @param {IAppRoute[]} routes
+ * @param {IAppContainer} container
+ * @param {IAppRoute[]} Controller
  */
-function createRouterFromController(app: Express, controller: any, routes: IAppRoute[]) {
-  const controllerRouter = new (Router as any)();
+function buildController(app: Express, container: IAppContainer, Controller: any): void {
+  const controller = new Controller(container);
+  const router = new (Router as any)();
 
-  routes.forEach((route: IAppRoute) => {
-    const routeArguments = [
+  Controller.routes.forEach((route: IAppRoute) => {
+    const middlewares = [
       ...(route.middlewares || []),
-      controller[route.bind].bind(controller),
     ];
 
-    controllerRouter[route.method](route.path, routeArguments);
+    router[route.method](route.path, ...middlewares, controller[route.handler].bind(controller));
 
-    // Log
-    const bindText = `${controller.constructor.name}::${route.bind}`;
-    const routeText = `${route.method.toUpperCase()} ${controller.path + route.path}`;
+    const bindText = `${Controller.name}::${route.handler}`;
+    const routeText = `${route.method.toUpperCase()} ${Controller.domain + route.path}`;
     console.log(`Bound route ${routeText} to ${bindText}`);
   });
 
-  app.use(controller.path, controllerRouter);
+  app.use(Controller.domain, router);
 }
 
 /**
@@ -39,11 +37,11 @@ function createRouterFromController(app: Express, controller: any, routes: IAppR
  * @param {Express} app
  * @param {IAppContainer} container
  */
-function createControllers(app: Express, container: IAppContainer) {
+function createControllers(app: Express, container: IAppContainer): Express {
   console.log('Creating routes');
-  const exampleController = new ExampleController(container);
 
-  createRouterFromController(app, exampleController, ExampleRoutes);
+  buildController(app, container, ExampleController);
+
   console.log('Routes initialized');
   return app;
 }

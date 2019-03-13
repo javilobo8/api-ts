@@ -1,6 +1,6 @@
 export default interface IAppRoute {
   path: string;
   method: string;
-  bind: string;
+  handler: string;
   middlewares?: any[];
 }

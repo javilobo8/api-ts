@@ -1,10 +1,18 @@
 import { Request, Response } from 'express';
 
 import IAppContainer from 'src/interfaces/IAppContainer';
+import IAppRoute from 'src/interfaces/IRoute';
 import ExampleService from 'src/services/example.service';
 
 class ExampleController {
-  public path = '/example'; // this could be on routes
+  public static domain: string = '/example';
+  public static routes: IAppRoute[] = [
+    {
+      path: '/message',
+      method: 'get',
+      handler: 'getExampleMessage',
+    },
+  ];
 
   private exampleService: ExampleService;
 
