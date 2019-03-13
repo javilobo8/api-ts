@@ -31,17 +31,19 @@
   "devDependencies": {
     "@types/bluebird": "^3.5.24",
     "@types/express": "^4.16.0",
-    "@types/jest": "^23.3.9",
+    "@types/jest": "^24.0.11",
     "@types/supertest": "^2.0.6",
-    "jest": "^23.6.0",
-    "supertest": "^3.3.0",
-    "ts-jest": "^23.10.4",
+    "jest": "^24.5.0",
+    "supertest": "^4.0.0",
+    "ts-jest": "^24.0.0",
     "tslint": "^5.11.0"
   },
   "jest": {
     "testEnvironment": "node",
     "verbose": true,
-    "setupTestFrameworkScriptFile": "<rootDir>/test/bootstrap-jest.js",
+    "setupFilesAfterEnv": [
+      "<rootDir>/test/bootstrap-jest.js"
+    ],
     "transform": {
       ".(ts|tsx)": "ts-jest"
     },
@@ -57,7 +59,8 @@
     ],
     "moduleFileExtensions": [
       "ts",
-      "js"
+      "js",
+      "json"
     ],
     "preset": "ts-jest/presets/js-with-ts"
   }
