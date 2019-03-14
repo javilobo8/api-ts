@@ -8,7 +8,7 @@ Typescript node web application boilerplate based on express.
 
 * Add DB/models
 * Add middlewares
-* Fix Jest module resolver
+* Use other test framework
 
 ## Installation
 
