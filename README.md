@@ -8,7 +8,7 @@ Typescript node web application boilerplate based on express.
 
 * Add DB/models
 * Add middlewares
-* Use other test framework like NYC
+* Use other test framework like
 
 ## Installation
 
