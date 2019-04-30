@@ -3,4 +3,5 @@ export default interface IAppRoute {
   method: string;
   handler: string;
   middlewares?: any[];
+  skipAuth: boolean;
 }

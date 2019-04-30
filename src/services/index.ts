@@ -1,9 +1,13 @@
-import ExampleService from './example.service';
+import IServiceContainer from '../types/IServiceContainer';
+import productService from './product';
+import ProductService from './product/product.service';
 
-function createServices(config: object, models: object) {
-  return {
-    exampleService: new ExampleService(config, models),
-  };
+export interface IServices {
+  productService: ProductService;
 }
 
-export default createServices;
+export default function createServices(servicesContainer: IServiceContainer) {
+  return {
+    productService: productService(servicesContainer),
+  };
+}
