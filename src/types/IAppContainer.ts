@@ -1,4 +1,4 @@
-import { IServices } from "src/services";
+import { IServices } from 'src/services';
 
 export default interface IAppContainer {
   config: object;
